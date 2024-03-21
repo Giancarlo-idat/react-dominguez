@@ -1,0 +1,141 @@
+@use '../base/' as *;
+
+@font-face {
+    font-family: 'Rubik';
+    src: url('../../font/Rubik-Regular.ttf');
+}
+
+.modal {
+    font-family: 'Rubik', sans-serif;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @include flex(column, nowrap, center, center);
+    position: absolute;
+    z-index: 2;
+
+    &__container {
+        margin: auto;
+        background-color: #fff;
+        width: 100%;
+        max-width: 450px;
+        text-align: center;
+        padding: 2rem 1.5rem;
+        border-radius: 1rem;
+
+        &--picture {
+            width: 100%;
+            margin: 1rem auto;
+            max-width: 400px;
+
+            img {
+                width: 100%;
+                display: block;
+            }
+
+        }
+    }
+
+    &__title {
+        font-family: 'Rubik', sans-serif;
+        font-size: .85rem;
+        text-transform: uppercase;
+        font-weight: 500;
+        color: #000000DE;
+    }
+
+    &__close {
+        display: flex;
+        justify-content: flex-end;
+
+        &--button {
+            color: #333;
+            padding: 1rem .5rem;
+            border: none;
+            border-radius: .5rem;
+            cursor: pointer;
+            transition: background-color .3s;
+
+            &:hover {
+                color: #fff;
+                background-color: #555;
+            }
+        }
+    }
+
+    &__login {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        font-weight: 500;
+        color: #000000DE;
+        font-family: 'Rubik', sans-serif;
+    }
+
+    &__form {
+
+
+        &--input {
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            font-family: 'Rubik', sans-serif;
+        }
+
+        &--button,
+        &--link--register {
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            background-color: $header-bg;
+            color: #fff;
+            font-family: 'Rubik', sans-serif;
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px, rgba(0, 0, 0, 0.08) 0px 1px 3px;
+            transition: background-color 0.3s;
+            font-size: .85rem;
+
+            &:hover {
+                background-color: #555;
+            }
+
+            &:disabled {
+                background-color: #ccc;
+                color: #333;
+                cursor: not-allowed;
+            }
+
+        }
+
+        &--link {
+            font-family: 'Rubik', sans-serif;
+
+            &--forgot {
+                font-size: 0.75rem;
+                font-weight: 500;
+                color: #000000DE;
+                text-align: end;
+            }
+
+            &--register {
+                background-color: $icon-bg;
+
+            }
+        }
+
+        p {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #000000DE;
+            font-family: 'Rubik', sans-serif;
+        }
+
+    }
+}

@@ -1,0 +1,44 @@
+@use '../base' as *;
+
+body {
+    ::selection {
+        background-color: $icon-bg;
+        color: $white;
+    }
+}
+
+.app {
+    height: 100vh;
+}
+
+.container-principal {
+    width: 87.5rem;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 15px;
+    background-color: #FAFAFA;
+    @include flex(column, nowrap, center, center);
+}
+
+.color-icon {
+    color: $icon-bg;
+}
+
+.flex {
+    @include flex(row, nowrap, center, center);
+}
+
+.white {
+    color: $white;
+}
+
+.border {
+    border: 1px solid $white;
+    padding: 0.5rem 1.125rem;
+    border-radius: 3rem;
+}
+
+.error-message {
+    font-size: 0.75rem;
+    color: #ff0000;
+}

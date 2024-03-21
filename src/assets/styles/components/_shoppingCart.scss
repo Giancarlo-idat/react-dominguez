@@ -1,0 +1,149 @@
+@use '../base/' as *;
+
+.cart {
+    width: 100%;
+    background-color: #f4f4f4;
+
+    &__container {
+        width: 87.5rem;
+        max-width: 100%;
+        @include flex(row, nowrap, flex-start, flex-start);
+        padding: 0.938rem;
+        margin: 0 auto;
+        gap: 3rem;
+
+        &--items {
+            flex: 2;
+            @include flex(column, nowrap, flex-start, flex-start);
+            margin-top: 2rem;
+            gap: 1rem;
+            width: 100%;
+
+            h2 {
+                font-weight: 600;
+                font-size: 1.2rem;
+                margin-left: .3rem;
+            }
+
+        }
+
+        &--item {
+            width: 100%;
+            background-color: $white;
+            @include flex(row, nowrap, space-between, center);
+            padding: 0.938rem 2rem;
+            border-radius: 0.938rem;
+
+            img {
+                max-width: 10rem;
+            }
+
+            &--info {
+                @include flex(row, wrap, center, center);
+                width: 50%;
+
+                &--title {
+                    display: flex;
+                    flex-direction: column;
+                    width: 50%;
+                    gap: 1rem;
+
+                    .model {
+                        max-width: 12rem;
+                        line-height: 1.5;
+                        font-size: 1.1rem;
+                        color: #333333;
+                    }
+
+                    .marca {
+                        font-size: .85rem;
+                        font-weight: 700;
+                    }
+                }
+
+                &--price {
+                    color: #333333;
+                    width: 25%;
+                    font-size: 1.05rem;
+                }
+            }
+
+            &--quantity {
+                @include flex(column, wrap, center, center);
+
+                &--buttons {
+                    width: 100%;
+                    @include flex(row, wrap, space-between, center);
+
+                    button {
+                        width: 1.563rem;
+                        color: $white;
+                        border-radius: .375rem;
+                        background-color: $icon-bg;
+                        padding: .375rem;
+                        cursor: pointer;
+                    }
+
+                }
+
+                span {
+                    text-align: center;
+                    font-size: .7rem;
+                    color: #333333;
+                    margin-top: 0.625rem;
+                }
+            }
+        }
+
+        &--summary {
+            flex: 1;
+            @include flex(column, nowrap, flex-start, flex-start);
+            margin-top: 2rem;
+            gap: 1rem;
+            width: 100%;
+
+            h2 {
+                font-weight: 600;
+                font-size: 1.3rem;
+                margin-left: .2rem;
+            }
+
+            &--total {
+                width: 100%;
+                border-radius: 0.938rem;
+                background-color: $white;
+                padding: 1.5rem 0.938rem;
+                @include flex(column, nowrap, center, space-between);
+                gap: 2rem;
+
+                &--products,
+                &--shipping,
+                &--price {
+                    font-family: 'Poppins', sans-serif;
+                    color: #333333;
+                    font-weight: 600;
+                    font-size: .85rem;
+                    letter-spacing: .03rem;
+                    @include flex(row, nowrap, space-between, center);
+                }
+
+                &--checkout {
+                    background-color: $icon-bg;
+                    margin: 0 2.5rem;
+                    padding: 0.938rem 0;
+                    color: $white;
+                    border-radius: 2.5rem;
+                    cursor: pointer;
+                    text-align: center;
+
+                    &:disabled {
+                        background-color: #ccc;
+                        color: #ccc;
+                        cursor: not-allowed;
+                    }
+                }
+            }
+        }
+    }
+
+}

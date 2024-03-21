@@ -1,0 +1,30 @@
+@use '../base/' as *;
+
+
+.searchbar-form {
+    flex: 2;
+    width: 100%;
+    @include flex(row, nowrap, center, center);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 10px 0;
+
+    input {
+        width: 90%;
+        border: 2px solid #ffffff;
+        color: $secondary-text;
+
+        &::placeholder {
+            color: $secondary-text;
+        }
+    }
+
+    button {
+        cursor: pointer;
+
+        svg {
+            color: $black;
+        }
+    }
+}

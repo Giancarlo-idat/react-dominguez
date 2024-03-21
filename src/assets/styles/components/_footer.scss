@@ -1,0 +1,66 @@
+@use '../base/' as *;
+
+.footer {
+    width: 100%;
+    font-size: 0.875rem;
+    border-top: 0.0625rem solid $color-border;
+
+    &-section {
+        max-width: 87.5rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+        margin: 0 auto;
+        padding: 1rem 0 1.5625rem 0;
+
+    }
+
+    &-block {
+        @include flex(column, wrap, center, flex-start);
+        align-self: flex-start;
+        gap: 1rem;
+        margin: 1rem;
+
+        h5 {
+            font-weight: 700;
+            margin: 1.25rem 0 0.625rem 0;
+            color: $main-text;
+        }
+
+        .footer-list {
+            @include flex(column, wrap, center, flex-start);
+            gap: 1rem;
+            width: 100%;
+
+            &-item {
+                @include flex(row, wrap, flex-start, center);
+                width: 100%;
+                padding: 0.625rem 0;
+                transition: all .3s ease;
+                gap: 1rem;
+
+                svg {
+                    width: 1.25rem;
+                    color: $black;
+                }
+
+                &:hover {
+                    background-color: rgb(242, 242, 242);
+                }
+
+                a {
+                    color: $main-text;
+                }
+            }
+        }
+    }
+
+    &-legal {
+        @include flex(row, wrap, center, space-between);
+        padding: 1.5625rem 0;
+        font-size: 0.75rem;
+        color: $main-text;
+        border-top: 0.0625rem solid $color-border;
+
+        
+    }
+}

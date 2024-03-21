@@ -1,0 +1,159 @@
+@use '../base/' as *;
+
+
+.register {
+    width: 100%;
+    background-color: #F4F4F4;
+    padding: 1.25rem 0;
+
+    &__container {
+        width: 87.5rem;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 1rem;
+        background-color: $white;
+        @include flex(column, nowrap, center, center);
+
+        &__logo {
+            img {
+                width: 21.875rem;
+            }
+        }
+
+        &__content {
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            padding: 1rem;
+
+            &--form {
+                flex: 1;
+
+                .title {
+                    font-family: 'Poppins', sans-serif;
+                    font-weight: 700;
+                    font-size: 1.2rem;
+                }
+
+                form {
+                    width: 100%;
+                    margin-top: 2rem;
+
+                    label {
+                        margin: 1rem 0;
+                        font-size: 1rem;
+
+                        &:first-child {
+                            margin-top: 0;
+                        }
+                    }
+
+                    select {
+                        font-family: 'Poppins', sans-serif;
+                        border-bottom: 1px solid #ccc;
+                        font-size: .85rem;
+                        width: 60%;
+                        margin: 1.25rem 0;
+
+
+
+                        option {
+                            font-family: 'Poppins', sans-serif;
+                            font-size: .85rem;
+                            padding: 1.25rem 0;
+
+                        }
+                    }
+
+                    .input {
+                        width: 100%;
+                        margin-bottom: .5rem;
+                        padding: 1rem 0 .5rem 0;
+                        border-bottom: 1px solid #ccc;
+                        font-family: 'Poppins', sans-serif;
+                        font-size: .85rem;
+                        background-color: transparent;
+
+                    }
+
+                    .button {
+                        width: 100%;
+                        margin-top: 1rem;
+                        padding: 0.5rem 1.125rem;
+                        border: 1px solid $white;
+                        border-radius: 3rem;
+                        font-family: 'Poppins', sans-serif;
+                        font-weight: 700;
+                        font-size: 1rem;
+                        color: $white;
+                        background-color: $icon-bg;
+                        cursor: pointer;
+                        margin: 1.25rem 0;
+                    }
+
+                    .link {
+                        margin-top: 1rem;
+                        font-family: 'Poppins', sans-serif;
+                        font-weight: 700;
+                        font-size: 1rem;
+                        text-decoration: none;
+                        margin-left: 1.2rem;
+                    }
+
+                    .link:hover {
+                        color: $icon-bg;
+                    }
+                }
+
+                &--celular {
+                    @include flex(row, nowrap, center, center);
+                    gap: 1rem;
+                }
+
+                &--login {
+                    width: 100%;
+                    @include flex(row, nowrap, center, center);
+
+                    p {
+                        a {
+                            text-decoration: underline !important;
+                        }
+                    }
+                }
+            }
+
+            &--details {
+                @include flex(column, nowrap, flex-start, center);
+                flex: 1;
+                width: 100%;
+
+                h3 {
+                    font-family: 'Poppins', sans-serif;
+                    font-weight: 700;
+                    font-size: 1.2rem;
+                }
+
+                &--benefits {
+                    margin-top: 2rem;
+                    @include flex(column, nowrap, flex-start, flex-start);
+
+                    &--item {
+                        @include flex(row, nowrap, center, center);
+                        gap: 1rem;
+                        margin: 1.2rem 0;
+
+                        span {
+                            font-size: 1.063rem;
+                        }
+                        svg {
+                            width: auto;
+                        }
+
+                    }
+                }
+
+            }
+
+        }
+    }
+}

@@ -1,0 +1,133 @@
+@use '../base/' as *;
+
+.grid-container {
+    width: 100%;
+    margin: 15px 0;
+
+    .grid-title {
+        width: 100%;
+        @include flex(row, nowrap, space-between, center);
+        margin: 10px 0 20px;
+        color: $advertisement-bg;
+        font-weight: 700;
+        cursor: pointer;
+
+        border-bottom: 1px solid #ccc;
+        padding: 10px 0;
+
+    }
+
+    .grid-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        margin: 10px 0;
+        color: $secondary-text;
+        gap: 1rem;
+
+        .grid-item {
+            border: 1px solid #ccc;
+            padding: 20px 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+
+
+            .icons {
+                transition: all .4s ease;
+                transform: scale(0.5);
+            }
+
+            &:hover {
+                box-shadow: 0 0 10px rgba(235, 158, 127, 0.76);
+                border: 2px solid $advertisement-bg;
+
+                .icons {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+
+            &__content {
+
+                @include flex(column, nowrap, space-between, center);
+                gap: 1rem;
+                max-width: 100%;
+                position: relative;
+                height: 100%;
+
+                .icons {
+                    position: absolute;
+                    left: 0;
+                    opacity: 0;
+
+                    svg {
+                        width: 2rem;
+                        height: 35px;
+                        margin-bottom: 0.9375rem;
+                        background-color: $advertisement-bg;
+                        color: $white;
+                        border-radius: 50%;
+                        padding: 0.3125rem;
+                    }
+
+
+                }
+
+                span {
+                    font-family: 'Poppins', sans-serif;
+                    font-weight: 700;
+                }
+
+                p {
+                    font-weight: 700;
+                    word-break: break-all;
+                    ;
+                    font-size: .8rem;
+                }
+
+                h5,
+                strong {
+                    font-size: 12px;
+                    padding: 5px;
+                    line-height: 1.1rem;
+                }
+
+                strong {
+                    color: $advertisement-bg;
+                    font-weight: 700;
+                }
+
+                img {
+                    height: 200px;
+                    object-fit: contain;
+                }
+
+
+                .price {
+                    width: 100%;
+
+                    @include flex(row, wrap, center, center);
+
+                    p {
+                        width: 100%;
+                        text-align: center;
+                        font-size: 1.1rem;
+                        border: 1px solid #ccc;
+                        padding:15px;
+                        letter-spacing: 1px;
+                        border-radius: 10px;
+                        background-color: $advertisement-bg;
+                        color: $white;
+                    }
+
+                    margin-bottom: 10px;
+                }
+
+            }
+        }
+    }
+
+
+
+
+}
