@@ -8,7 +8,9 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
     border-radius: 15px;
+    gap: 1rem;
     padding: 10px 0;
+    margin-left: 1.2rem;
 
     input {
         width: 90%;
@@ -25,6 +27,7 @@
 
         svg {
             color: $black;
+            margin-right: 1.5rem;
         }
     }
 }

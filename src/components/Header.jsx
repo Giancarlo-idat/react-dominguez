@@ -1,36 +1,47 @@
-import { useAuth, useCart } from "../context";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  useAuth,
+  useCart,
+  useClientContext,
+  useEmployeeContext,
+  useModalContext,
+} from "@/context";
 import { LoginPage } from "@/pages";
 import {
   CartIcon,
-  Categories,
+  CloseIcon,
   FaChevronDownIcon,
   FavoriteIcon,
   SearchIcon,
 } from ".";
 import LogoDominguez from "../assets/images/logo_dominguez.png";
-import { useState } from "react";
 
 export const Header = () => {
-  const { cart } = useCart();
-  const { status, onLogout, user } = useAuth();
-  const totalQuantity = cart.reduce(
-    (total, product) => total + product.stock,
-    0
-  );
-  const [showModal, setShowModal] = useState(false);
+  const { cart, totalQuantity, limpiarCarrito } = useCart();
+  const { onLogout, auth } = useAuth();
+  const { clientProfile } = useClientContext();
+  const { employeeProfile } = useEmployeeContext();
+  const { openModal, closeModal, isModalOpen } = useModalContext();
 
-  const openModal = () => {
-    document.body.style.overflow = "hidden";
-    setShowModal(true);
+  const [showSearchBar, setShowSearchBar] = useState(false);
+
+  const openSearchBar = () => {
+    setShowSearchBar(true);
   };
 
   const onLogoutAccount = () => {
     onLogout();
+    limpiarCarrito();
   };
 
-  const emailUser = user?.email;
-  const closeModal = () => setShowModal(false);
+
+  const closeSearchBar = () => setShowSearchBar(false);
+
+  const clientFullName = [clientProfile?.nombres].filter(Boolean).join(" ");
+  const employeeFullName = [employeeProfile?.nombres].filter(Boolean).join(" ");
+
+  const namesProfileHeader = clientFullName || employeeFullName;
 
   return (
     <header className="header">
@@ -44,12 +55,29 @@ export const Header = () => {
             />
           </Link>
         </div>
-
-        <SearchBar />
-
         <nav className="header__icon">
           <ul className="header__icon-container">
-            {status === "not-authenticated" ? (
+            {auth?.status === "authenticated" ? (
+              <li className="header__icon-container--item">
+                <div className="column">
+                  <span>Hola, {namesProfileHeader}</span>
+                </div>
+                <ul className="dropdown">
+                  <li className="dropdown-item">
+                    <Link to={"/profile"}>Perfil</Link>
+                  </li>
+                  <li className="dropdown-item">
+                    <Link to={"/myaccount/myorders"}>Ordenes</Link>
+                  </li>
+                  <li>
+                    <Link to={"/dashboard"}>Dashboard</Link>
+                  </li>
+                  <li className="dropdown-item">
+                    <Link onClick={onLogoutAccount}>Cerrar sesión</Link>
+                  </li>
+                </ul>
+              </li>
+            ) : (
               <li className="header__icon-container--item">
                 Inicia sesión
                 <FaChevronDownIcon />
@@ -57,26 +85,9 @@ export const Header = () => {
                   <li className="dropdown-item">
                     <button onClick={openModal}>Iniciar sesión</button>
                   </li>
+
                   <li className="dropdown-item">
                     <Link to={"/myaccount/register"}>Registrate</Link>
-                  </li>
-                </ul>
-              </li>
-            ) : (
-              <li className="header__icon-container--item">
-                <div className="column">
-                  <span>Bievenido</span>
-                  <span>{emailUser}</span>
-                </div>
-                <ul className="dropdown">
-                  <li className="dropdown-item">
-                    <Link to={"/profile"}>Perfil</Link>
-                  </li>
-                  <li className="dropdown-item">
-                    <Link to={"/orders"}>Ordenes</Link>
-                  </li>
-                  <li className="dropdown-item">
-                    <Link onClick={onLogoutAccount}>Cerrar sesión</Link>
                   </li>
                 </ul>
               </li>
@@ -95,20 +106,33 @@ export const Header = () => {
                 <div className="badge">{totalQuantity}</div>
               </Link>
             </li>
+
+            <li className="header__icon-container--item">
+              <Link onClick={openSearchBar} title="Buscar productos">
+                <SearchIcon />
+              </Link>
+            </li>
           </ul>
         </nav>
-
-        {showModal && <LoginPage closeModal={closeModal} />}
+        {isModalOpen && <LoginPage closeModal={closeModal} />}
+        {showSearchBar && <SearchBar closeSearchBar={closeSearchBar} />}
       </div>
-      <Categories />
     </header>
   );
 };
 
-const SearchBar = () => {
+const SearchBar = ({ closeSearchBar }) => {
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Evita que el formulario se envíe
+    // Aquí puedes realizar acciones adicionales si es necesario
+  };
+
   return (
     <>
-      <form className="searchbar-form">
+      <form className="searchbar-form" onSubmit={handleSubmit}>
+        <button onClick={closeSearchBar} className="close-searchbar">
+          <CloseIcon />
+        </button>
         <input type="text" placeholder="Buscar producto..." />
         <button type="submit">
           <SearchIcon />

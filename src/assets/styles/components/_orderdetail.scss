@@ -1,0 +1,92 @@
+@use '../base/' as *;
+
+.myorders {
+
+    &-container {
+
+
+        .tracing {
+            margin: 50px 0;
+            border-radius: 1rem;
+            height: 12.5rem;
+            background-color: $white;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+
+            &__content {
+                flex: 1;
+
+                .timeline {
+                    display: flex;
+                    align-items: center;
+
+                    &-item {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        margin: 20px;
+
+                        p {
+                            font-family: 'Lato', sans-serif;
+                            font-size: 0.8rem;
+                            color: #333333;
+                            margin: 1.2rem 0 0;
+                        }
+                    }
+
+                    .status {
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 50%;
+                        background-color: #333333;
+                        margin: 0 10px;
+
+                        .circle {
+                            width: 10px;
+                            height: 10px;
+                            border-radius: 50%;
+                            background-color: #333333;
+                            margin-bottom: 10px;
+                        }
+
+                        .PENDIENTE {
+                            background-color: #333333; // Amarillo
+                        }
+
+                        .ENVIADO {
+                            background-color: #333333; // Verde
+                        }
+
+                        .ENTREGADO {
+                            background-color: #333333; // Azul
+                        }
+
+
+                        p {
+                            font-family: 'Lato', sans-serif;
+                            font-size: 0.8rem;
+                            color: #333;
+                        }
+                    }
+                }
+            }
+
+            &__address {
+                @include flex(column, nowrap, center, flex-end);
+                flex: 1;
+                gap: 1rem;
+
+                h4 {
+                    color: #333333;
+                    font-weight: bold;
+                    font-family: 'Lato', sans-serif;
+
+                }
+            }
+
+        }
+    }
+}

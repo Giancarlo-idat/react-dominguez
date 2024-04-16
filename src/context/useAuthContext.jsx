@@ -6,16 +6,15 @@ import { jwtDecode } from "jwt-decode";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const initialAuth = JSON.parse(localStorage.getItem("auth")) || {
+  const initialAuth = JSON.parse(localStorage.getItem("Bearer")) || {
     status: "not-authenticated",
     user: {},
   };
-  const [auth, setAuth] = useState();
+  const [auth, setAuth] = useState(initialAuth);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [user, setUser] = useState({});
-  const [status, setStatus] = useState(initialAuth);
   const source = axios.CancelToken.source();
 
   const handleError = (error) => {
@@ -33,17 +32,16 @@ export const AuthProvider = ({ children }) => {
           password,
         }
       );
-      localStorage.setItem("Bearer", data?.token);
+      
+      console.log(data);
+      localStorage.setItem("Bearer", JSON.stringify(data.token));
       localStorage.setItem("token-init-date", new Date().getTime());
-      setAuth(data);
-      setStatus("authenticated");
-      setUser(data);
+      setAuth({ status: "authenticated", user: data.user });
+      setUser({ response: data });
       Swal.fire("Inicio de sesión exitoso", "Bienvenido", "success");
     } catch (error) {
       Swal.fire("Error", "Usuario o contraseña incorrectos", "error");
       handleError(error);
-      setLoading(false);
-      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -56,21 +54,13 @@ export const AuthProvider = ({ children }) => {
         "http://localhost:8099/api/dominguez/clientes",
         cliente
       );
-
-      localStorage.setItem("Bearer", data?.token);
-      localStorage.setItem("token-init-date", new Date().getTime());
-      document.cookie = `Bearer=${data?.token}; HttpOnly; Secure; SameSite=Strict`;
-      setAuth(data);
-      setStatus("authenticated");
+      Swal.fire("Registro exitoso", "Bienvenido", "success");
+      setAuth({ status: "authenticated", user: data });
       setUser(data);
-      setLoading(false);
     } catch (error) {
+      Swal.fire("Error", "No se pudo registrar el usuario", "error");
       handleError(error);
-      if (axios.isCancel(error)) {
-        console.log("Request canceled", error.message);
-      } else {
-        console.log("Error", error.message);
-      }
+    } finally {
       setLoading(false);
     }
   };
@@ -78,34 +68,43 @@ export const AuthProvider = ({ children }) => {
   const onLogout = () => {
     Swal.fire("Cerrando sesión", "Hasta luego", "success");
     localStorage.clear();
-    setAuth({});
-    setStatus("not-authenticated");
+    setAuth({ status: "not-authenticated", user: {} });
   };
 
+  const limpiarCarritoAlExpirarToken = () => {
+    setCart([]);
+    localStorage.setItem("cart", JSON.stringify([]));
+  };
+  
   useEffect(() => {
-    const checkAuthStatus = async () => {
+    const checkAuthStatus = () => {
       const token = localStorage.getItem("Bearer");
       if (token) {
         try {
           const decodedToken = jwtDecode(token);
           if (decodedToken.exp * 1000 > Date.now()) {
             setAuth({ status: "authenticated", user: decodedToken });
-            setStatus({ status: "authenticated" });
-            setUser({ status: "authenticated", user: decodedToken });
           } else {
             localStorage.removeItem("Bearer");
+            setAuth({ status: "not-authenticated", user: {} });
+            limpiarCarritoAlExpirarToken();
           }
         } catch (error) {
           localStorage.removeItem("Bearer");
+          setAuth({ status: "not-authenticated", user: {} });
         }
+      } else {
+        setAuth({ status: "not-authenticated", user: {} });
       }
-      setLoading(false);
+      // Agregar un retardo antes de establecer loading en falso
+      setTimeout(() => setLoading(false), 100);
     };
-
     checkAuthStatus();
-  }, []);
 
-  source.cancel("La solicitud fue cancelada.");
+    return () => {
+      source.cancel("La solicitud fue cancelada.");
+    };
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -115,7 +114,6 @@ export const AuthProvider = ({ children }) => {
         error,
         errorMessage,
         user,
-        status,
         onLogin,
         onRegister,
         onLogout,

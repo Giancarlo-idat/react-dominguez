@@ -1,26 +1,29 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import {
   HomePage,
   RegisterPage,
-  CheckoutPage,
   ShoppingCartPage,
+  CheckoutDeliveryPage,
+  PaymentSuccessStripe,
+  PaymentCancelStripe,
+  MyOrderDetail,
+  MyOrders,
 } from "@/pages";
-import { Footer, Header } from "@/components";
-import "@/assets/styles/main.scss";
+import { ProductDetail } from "../pages";
 
 export const AppRoute = () => {
   return (
-    <div className="app">
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-           <Route path="/myaccount/register" element={<RegisterPage />} />
-          <Route path="/myproducts/cart" element={<ShoppingCartPage />} />
-          <Route path="/checkout/delivery" element={<CheckoutPage />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    </div>
+    <Routes>
+      <Route path="/" element={<Navigate to="/home" />} />
+      <Route path="/home" element={<HomePage />} />
+      <Route path="/product/productDetail/:id" element={<ProductDetail />} />
+      <Route path="/myaccount/myorders" element={<MyOrders />} />
+      <Route path="/myaccount/myorders/detail" element={<MyOrderDetail />} />
+      <Route path="/myaccount/register" element={<RegisterPage />} />
+      <Route path="/myproducts/cart" element={<ShoppingCartPage />} />
+      <Route path="/checkout/delivery" element={<CheckoutDeliveryPage />} />
+      <Route path="/payment/success" element={<PaymentSuccessStripe />} />
+      <Route path="/payment/cancel" element={<PaymentCancelStripe />} />
+    </Routes>
   );
 };

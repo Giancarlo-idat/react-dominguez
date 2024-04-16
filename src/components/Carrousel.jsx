@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Legion from "@/assets/images/Legion-Go-Z1.jpg";
 
 export const Carrousel = ({images, autoPlay, showButtons}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,8 +41,8 @@ export const Carrousel = ({images, autoPlay, showButtons}) => {
   };
 
   return (
-    <section className="carousel">
-      <div className="carousel-container">
+    <section className="carousel ">
+      <div className="carousel-container container-principal">
         <img
           src={`../../../src/assets/images/${selectedImage}`}
           alt="Carousel"

@@ -1,11 +1,47 @@
 import ReactDOM from "react-dom/client";
-import { AppRoute } from "./routes/AppRoute";
-import { CartProvider, AuthProvider } from "./context";
+import { MainRoute } from "./routes";
+import {
+  CartProvider,
+  AuthProvider,
+  TipoDocumentoProvider,
+  PaymentProvider,
+  ClientProvider,
+  DocVentaProvider,
+  EmployeeProvider,
+  RolProvider,
+  CategoriesProvider,
+  ProductProvider,
+  ProveedorProvider,
+  ModalProvider,
+  ReportsProvider,
+} from "./context";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
- <AuthProvider>
-   <CartProvider>
-    <AppRoute />
-  </CartProvider>
- </AuthProvider>
+  <ModalProvider>
+    <AuthProvider>
+      <ReportsProvider>
+        <PaymentProvider>
+          <CartProvider>
+            <CategoriesProvider>
+              <ProductProvider>
+                <RolProvider>
+                  <TipoDocumentoProvider>
+                    <ProveedorProvider>
+                      <ClientProvider>
+                        <EmployeeProvider>
+                          <DocVentaProvider>
+                            <MainRoute />
+                          </DocVentaProvider>
+                        </EmployeeProvider>
+                      </ClientProvider>
+                    </ProveedorProvider>
+                  </TipoDocumentoProvider>
+                </RolProvider>
+              </ProductProvider>
+            </CategoriesProvider>
+          </CartProvider>
+        </PaymentProvider>
+      </ReportsProvider>
+    </AuthProvider>
+  </ModalProvider>
 );

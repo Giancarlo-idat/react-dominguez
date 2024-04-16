@@ -1,0 +1,101 @@
+@use '../base/' as *;
+
+.myorders {
+    width: 100%;
+    background-color: #FAFAFA;
+
+    &-container {
+        max-width: 87.5rem;
+        margin: 2rem auto;
+
+        padding: 2rem;
+    }
+
+
+    &__title {
+        background-color: $white;
+        margin: 0 0 4rem 0;
+        padding: 2rem;
+        font-family: 'Lato', sans-serif;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    &-content {
+        background-color: $white;
+        padding: 2rem;
+
+        .myorders__item {
+            width: 100%;
+
+            &-header {
+                @include flex (row, nowrap, space-between, center);
+                margin: 1rem 0;
+
+                p {
+                    font-family: 'Lato', sans-serif;
+                    color: #333;
+                    font-weight: 600;
+                }
+            }
+
+
+
+
+            &--detail {
+                @include flex (row, nowrap, center, center);
+                margin: 3.5rem 0 2rem;
+
+
+                .content-order,
+                p,
+                .btn-detail {
+                    display: flex;
+                    justify-content: flex-end;
+                    flex: 1
+                }
+
+                .content-order {
+                    @include flex (row, wrap, flex-start, center);
+
+                    gap: 1rem;
+
+                    .detalle-venta {
+                        @include flex (column, wrap, center, center);
+                        gap: .5rem;
+
+                        img {
+                            width: 6.25rem;
+                            height: 6.25rem;
+                        }
+
+                        p {
+                            font-family: 'Lato', sans-serif;
+                            font-size: .8rem;
+                            color: #333;
+                            font-weight: 400;
+                        }
+                    }
+                }
+
+                p {
+                    font-family: 'Lato', sans-serif;
+                    color: #333;
+                    font-weight: bold;
+                }
+
+                .btn-detail {
+                    a {
+                        font-family: 'Lato', sans-serif;
+                        color: $white;
+                        border-radius: 1rem;
+                        padding: 1rem 4.5rem;
+                        letter-spacing: .1rem;
+                        background-color: $icon-bg;
+                    }
+                }
+            }
+        }
+    }
+}

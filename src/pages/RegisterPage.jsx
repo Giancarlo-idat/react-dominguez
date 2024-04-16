@@ -1,20 +1,28 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
-import { useAuthStore } from "@/hooks";
-import { fetchTipoDocumento } from "@/redux";
 import { validationSchema, initialValues } from "@/utilities";
-import LogoDominguez from "../assets/images/logo_dominguez.png";
 import {
   GiftIcon,
   NotificationIcon,
   StarIcon,
+  EyeIcon,
+  EyeSlashIcon,
   StickyNoteIcon,
-} from "../components";
+} from "@/components";
+import { useAuth, useTipDocument } from "../context";
+import LogoDominguez from "@/assets/images/logo_dominguez.png";
 
 export const RegisterPage = () => {
- 
+  const { tipoDocumento } = useTipDocument();
+  const { onRegister, setLoading } = useAuth();
+  const [viewPassword, setViewPassword] = useState(false);
+
+  const handleViewPassword = () => {
+    setViewPassword(!viewPassword);
+  };
+
+  const navigate = useNavigate();
 
   const { handleSubmit, values, touched, handleBlur, errors, handleChange } =
     useFormik({
@@ -46,15 +54,22 @@ export const RegisterPage = () => {
             sexo: values.sexo,
           };
 
-          await startRegister(formattedData);
+          await onRegister(formattedData);
+          navigate("/");
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth", // Para un desplazamiento lento
+          });
 
           console.log("Datos enviados:", formattedData);
         } catch (error) {
           console.log(error.message);
+        } finally {
+          setLoading(false);
         }
       },
     });
-  
 
   return (
     <div className="register">
@@ -124,7 +139,7 @@ export const RegisterPage = () => {
               {touched.sexo && errors.sexo ? (
                 <div className="error-message">{errors.sexo}</div>
               ) : null}
-             {/*  <label htmlFor="tipoDocumento">Tipo de documento:</label>
+              <label htmlFor="tipoDocumento">Tipo de documento:</label>
               <select
                 name="tipoDocumento"
                 onChange={handleChange}
@@ -146,7 +161,7 @@ export const RegisterPage = () => {
               {touched.tipoDocumento && errors.tipoDocumento ? (
                 <div className="error-message">{errors.tipoDocumento}</div>
               ) : null}
- */}
+
               <label htmlFor="numeroDocumento">N° de documento: </label>
               <input
                 name="numeroDocumento"
@@ -188,15 +203,36 @@ export const RegisterPage = () => {
                 <div className="error-message">{errors.email}</div>
               ) : null}
               <label htmlFor="password">Contraseña: </label>
-              <input
-                name="password"
-                className="input"
-                type="password"
-                placeholder="Password"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
+              <div className="input-password" onClick={handleViewPassword}>
+                {viewPassword ? (
+                  <>
+                    <input
+                      name="password"
+                      className="input password-input"
+                      type="text"
+                      placeholder="Password"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <EyeIcon className="eye-icon" width="20" height="20" />
+                  </>
+                ) : (
+                  <>
+                    <input
+                      name="password"
+                      className="input password-input"
+                      type="password"
+                      placeholder="Password"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <EyeSlashIcon className="eye-icon" width="20" height="20" />
+                  </>
+                )}
+              </div>
+
               {touched.password && errors.password ? (
                 <div className="error-message">{errors.password}</div>
               ) : null}

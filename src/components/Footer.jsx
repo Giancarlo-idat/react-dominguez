@@ -116,7 +116,9 @@ export const Footer = () => {
         </div>
 
         <div className="footer-legal">
-          <p>© 2021 Importaciones Dominguez. Todos los derechos reservados.</p>
+          <p>© TODOS LOS DERECHOS RESERVADOS</p>
+          <p>Importaciones Dominguez S.A.C - RUC: 20546989621</p>
+          <p>Ayacucho - Perú</p>
         </div>
       </div>
     </footer>

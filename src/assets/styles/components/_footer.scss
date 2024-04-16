@@ -3,7 +3,8 @@
 .footer {
     width: 100%;
     font-size: 0.875rem;
-    border-top: 0.0625rem solid $color-border;
+    border-top: 0.0625rem solid #FAFAFA;
+    background-color: #FAFAFA;
 
     &-section {
         max-width: 87.5rem;
@@ -55,12 +56,19 @@
     }
 
     &-legal {
-        @include flex(row, wrap, center, space-between);
+        background-color: #191919;
+        @include flex(column, wrap, flex-start, center);
         padding: 1.5625rem 0;
         font-size: 0.75rem;
         color: $main-text;
         border-top: 0.0625rem solid $color-border;
 
-        
+        p {
+            color: $white;
+            font-family: 'Lato ', sans-serif;
+            margin: .1rem 0;
+        }
+
+
     }
 }

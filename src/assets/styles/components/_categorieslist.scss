@@ -1,0 +1,32 @@
+@use '../base/' as *;
+
+
+.categories-list {
+    margin: 2rem 0;
+
+    .container-principal {
+        display: flex;
+        flex-direction: column;
+
+        .container-categoria {
+
+            img {
+                width: 100px;
+                object-fit: contain;
+                height: 100px;
+            }
+        }
+
+        .slick-slider {
+            width: 100%;
+        }
+    }
+
+    .slick-next:before,
+    .slick-prev:before {
+        font-size: 20px;
+        line-height: 1;
+        opacity: .75;
+        color: $icon-bg;
+    }
+}

@@ -1,24 +1,28 @@
 import { Carrousel } from "@/components";
-import { MotherBoardPage } from ".";
+import { ProcesadorPage, SectionPage, CasesPage } from ".";
+import { Footer, Header, CategoriesList, Banner } from "@/components";
 
 export const HomePage = () => {
-  const images = ["Asus-23.jpg", "Asus-intel.jpg"];
+  const images = [
+    "BannerVentus.png",
+    "Asus-intel.jpg",
+    "bannerMSI.png",
+    "BANNER_MONITOR.png",
+    "BannerGigaByte.png",
+  ];
 
   return (
     <>
-      <main className="container-principal">
+      <Header />
+      <main className="container">
         <Carrousel images={images} autoPlay={true} />
-        <MotherBoardPage />
-        <MotherBoardPage />
-        <MotherBoardPage />
-        <MotherBoardPage />
-        <MotherBoardPage />
-        <MotherBoardPage />
-        <MotherBoardPage />
-        <MotherBoardPage />
-        <MotherBoardPage />
-        <MotherBoardPage />
+        <CategoriesList />
+        <SectionPage />
+        <Banner />
+        <ProcesadorPage />
+        <CasesPage />
       </main>
+      <Footer />
     </>
   );
 };

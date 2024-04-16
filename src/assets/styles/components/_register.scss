@@ -17,6 +17,11 @@
         &__logo {
             img {
                 width: 21.875rem;
+                margin: 20px 0;
+
+                @include mobile {
+                    width: 15rem;
+                }
             }
         }
 
@@ -26,8 +31,16 @@
             display: flex;
             padding: 1rem;
 
+            @include mobile {
+                @include flex(column, nowrap, center, center);
+            }
+
             &--form {
                 flex: 1;
+
+                @include mobile {
+                    width: 100%;
+                }
 
                 .title {
                     font-family: 'Poppins', sans-serif;
@@ -74,6 +87,23 @@
                         font-size: .85rem;
                         background-color: transparent;
 
+                    }
+
+                    .input-password {
+                        @include flex(row, nowrap, center, center);
+
+                        input {
+                            flex: 2;
+                        }
+
+                        svg {
+                            position: relative;
+                            width: 20px;
+
+                            @include mobile {
+                                position: relative;
+                            }
+                        }
                     }
 
                     .button {
@@ -127,6 +157,10 @@
                 flex: 1;
                 width: 100%;
 
+                @include mobile {
+                    margin: 4rem;
+                }
+
                 h3 {
                     font-family: 'Poppins', sans-serif;
                     font-weight: 700;
@@ -145,6 +179,7 @@
                         span {
                             font-size: 1.063rem;
                         }
+
                         svg {
                             width: auto;
                         }

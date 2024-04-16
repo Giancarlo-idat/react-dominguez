@@ -1,14 +1,18 @@
-
-
 @mixin flex($dir, $wrap, $just, $align) {
     display: flex;
     flex-flow: $dir $wrap;
     justify-content: $just;
     align-items: $align;
-  }
+}
 
-@mixin media( $medida : 800px ){
-    @media screen and (max-width:$medida){
-        @content
+@mixin media($medida : 800px) {
+    @media screen and (max-width:$medida) {
+        @content;
+    }
+}
+
+@mixin mobile($medida: 500px) {
+    @media screen and (max-width: $medida) {
+        @content;
     }
 }

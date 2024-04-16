@@ -1,0 +1,315 @@
+@use '../base/' as *;
+
+.delivery-checkout {
+    background-color: #fafafa;
+    width: 100%;
+    height: calc(100vh - 6.25rem);
+
+    &--container {
+        width: 87.5rem;
+        height: 100%;
+        @include flex(row, nowrap, center, center);
+        margin: 0 auto;
+
+        &--delivery {
+            @include flex(column, nowrap, center, center);
+            width: 60%;
+
+            &__address {
+                width: 100%;
+                background-color: $white;
+                @include flex(row, nowrap, space-between, center);
+                gap: 2rem;
+                padding: 20px;
+                margin: 50px;
+                border: 1px solid #ccc;
+                box-shadow: 0 0 0;
+                border-radius: 1rem;
+
+                .address {
+                    @include flex(row, nowrap, center, center);
+                    gap: 1rem;
+
+                    svg {
+                        width: 25px;
+                        height: 25px;
+                    }
+                }
+
+                .change-direction {
+                    @include flex(row, nowrap, center, center);
+                    gap: .5rem;
+
+                    p {
+                        font-size: .85rem;
+                        color: #8888a7;
+                        text-decoration: underline;
+                    }
+
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                        color: #343e49;
+                    }
+                }
+
+            }
+
+            &__dates {
+                width: 100%;
+                @include flex(column, nowrap, center, flex-start);
+                border-radius: 1rem;
+
+                .items {
+                    background-color: $white;
+                    padding: 1.5rem;
+                    @include flex(column, nowrap, flex-start, flex-start);
+                    width: 100%;
+
+                    .products {
+                        width: 100%;
+                        display: grid;
+                        grid-template-columns: repeat(4, 1fr);
+                        grid-gap: 1rem;
+                        margin: .5rem 0;
+
+                    }
+
+                    img {
+                        width: 7.5rem;
+                    }
+
+                    strong {
+                        font-size: 1.1rem;
+                        margin: 2rem 0;
+                        font-weight: 600;
+                        color: #333333;
+                    }
+                }
+
+                .date {
+                    width: 100%;
+                    border-radius: 1rem;
+                    padding: 20px;
+                    border: 1px solid #888888;
+                    @include flex(column, nowrap, center, flex-start);
+                    gap: .6rem;
+
+                    &__icon {
+                        @include flex(row, nowrap, flex-start, center);
+
+                    }
+
+                    &__options {
+                        width: 100%;
+                        @include flex(row, nowrap, center, center);
+                        gap: 1rem;
+
+                        .option {
+                            @include flex(column, nowrap, center, flex-start);
+                            gap: .3rem;
+                            width: 15%;
+
+                            span,
+                            strong {
+                                font-size: .9rem;
+                            }
+
+                            strong {
+                                font-weight: 700;
+                                margin: 0;
+                            }
+                        }
+
+                        .contenedor {
+                            @include flex(row, nowrap, space-around, center);
+                            width: 85%;
+
+                            .date-price {
+
+                                @include flex(column, nowrap, center, center);
+
+                                .arriba,
+                                .abajo {
+
+                                    padding: 10px;
+
+                                    span {
+                                        color: #333333;
+                                    }
+
+                                }
+
+                                .arriba {
+                                    display: flex;
+                                    gap: .5rem;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                }
+
+                                .abajo {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    padding: 20px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 5px;
+                                    cursor: pointer;
+                                }
+
+                                .seleccionado {
+                                    background-color: $important-red2;
+                                    color: $white;
+                                }
+                            }
+                        }
+
+
+                    }
+
+                    span,
+                    p {
+                        color: #333333;
+                        font-size: .9rem;
+                    }
+
+                    h6 {
+                        color: #333333;
+                        width: 100%;
+                        font-size: .95rem;
+                        padding: 1rem 0;
+                        text-align: center;
+                        border-top: 1px solid;
+                        border-bottom: 1px solid;
+                        border-color: #ccc;
+                        margin: 1rem 0;
+                    }
+
+                    svg {
+                        width: 25px;
+                        height: 25px;
+                        color: #323233;
+                    }
+                }
+            }
+        }
+
+        &--details {
+            width: 40%;
+            margin-top: 3rem;
+            @include flex(column, nowrap, center, center);
+
+            &__title {
+                @include flex(row, nowrap, center, center);
+
+                h4 {
+                    margin: 1rem 0;
+                    color: #888888;
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    font-family: 'Lato', sans-serif;
+                }
+            }
+
+            &__items {
+                @include flex(column, nowrap, center, flex-start);
+
+                background-color: $white;
+                padding: 1.25rem;
+                border-radius: 20px;
+
+                .size_products {
+                    color: #888888;
+                    font-family: .85rem;
+                    font-family: 'Lato', sans-serif;
+                    margin: 0 0 1rem 0;
+                }
+
+
+                .items {
+
+                    @include flex(row, nowrap, center, center);
+                    gap: 1rem;
+                    margin: .85rem 0;
+
+                    &__image {
+                        img {
+                            width: 80px;
+                        }
+                    }
+
+                    &__description {
+                        p {
+                            font-family: 'Lato', sans-serif;
+                            font-size: .7rem;
+                        }
+                    }
+
+                    &__price {
+                        font-family: 'Lato', sans-serif;
+                        font-size: .85rem;
+                        color: #333333;
+
+                    }
+                }
+
+                .shopping_cart {
+                    button {
+                        font-family: 'Lato', sans-serif;
+                        background-color: transparent;
+                        color: #888888;
+                        font-size: .85rem;
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+                }
+
+                button {
+                    background-color: $important-red2;
+                    padding: 20px;
+                    color: $white;
+
+                    &:disabled {
+                        background-color: #ccc;
+                    }
+                }
+            }
+
+            &__total {
+                padding: 0 0 0 1.25rem;
+                @include flex(column, nowrap, center, center);
+                width: 100%;
+
+                .shipping,
+                .subtotal,
+                .total {
+                    width: 100%;
+                    @include flex(row, nowrap, space-between, center);
+                    margin: .75rem 0;
+
+                    p {
+                        font-family: 'Lato', sans-serif;
+                        font-size: .85rem;
+                        color: #333333;
+                        font-weight: 700;
+                    }
+
+                }
+            }
+
+            &__payment {
+                width: 100%;
+                @include flex(column, nowrap, center, center);
+                padding: 0 0 0 1.25rem;
+                margin: 1rem auto;
+
+                .payment {
+                    width: 100%;
+                    border-radius: 1.3rem;
+                    cursor: pointer;
+                }
+            }
+        }
+
+    }
+}

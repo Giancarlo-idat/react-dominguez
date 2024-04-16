@@ -84,6 +84,12 @@
             border-radius: 0.5rem;
             font-size: 0.85rem;
             font-family: 'Rubik', sans-serif;
+
+        }
+
+        .password {
+            width: 100%;
+            border: none;
         }
 
         &--button,
@@ -127,6 +133,18 @@
             &--register {
                 background-color: $icon-bg;
 
+            }
+        }
+
+        &--password {
+            @include flex(row, nowrap, center, center);
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin: 20px 0;
+
+            svg {
+                width: 20px;
+                margin-right: 15px;
             }
         }
 

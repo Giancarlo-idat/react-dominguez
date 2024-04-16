@@ -1,0 +1,42 @@
+.banner-container {
+    padding: 0 2rem;
+    transition: all .3s ease;
+    background-color: #FAFAFA;
+
+    .banner-img {
+        transition: transform 0.3s ease;
+        max-width: 100%;
+        height: auto;
+        border: 1px solid;
+        border-radius: 10px;
+    }
+
+    &:hover .banner-img {
+        transform: scale(1.02);
+    }
+
+
+
+}
+
+.banner-grid {
+    padding: 0 2rem;
+    display: grid;
+    margin: 4rem 0;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    transition: all .3s ease;
+
+    img {
+        transition: transform 0.3s ease;
+        max-width: 100%;
+        height: auto;
+        border: 1px solid;
+        border-radius: 10px;
+        overflow: hidden;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}

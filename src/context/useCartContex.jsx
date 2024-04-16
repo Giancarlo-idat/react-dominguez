@@ -19,7 +19,9 @@ export const CartProvider = ({ children }) => {
       );
       setCart(
         cart.map((item) =>
-          item.id === producto.id ? { ...item, stock: item.stock + 1 } : item
+          item.id === producto.id
+            ? { ...item, cantidad: item.cantidad + 1 }
+            : item
         )
       );
     } else {
@@ -28,24 +30,15 @@ export const CartProvider = ({ children }) => {
         "Se agregó a su carrito",
         "success"
       );
-      setCart([...cart, { ...producto, stock: 1 }]);
+      setCart([...cart, { ...producto, cantidad: 1 }]);
     }
-  };
-
-  const eliminarProductoCarrito = (idProduct) => {
-    Swal.fire(
-      "Producto eliminado del carrito",
-      "Se eliminó de su carrito",
-      "success"
-    );
-    setCart(cart.filter((item) => item.id !== idProduct));
   };
 
   const incrementarCantidad = (idProduct) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
         item.id === idProduct
-          ? { ...item, stock: Math.min(item.stock + 1, 10) }
+          ? { ...item, cantidad: Math.min(item.cantidad + 1, 10) }
           : item
       )
     );
@@ -53,11 +46,15 @@ export const CartProvider = ({ children }) => {
 
   const decrementarCantidad = (idProduct) => {
     setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === idProduct
-          ? { ...item, stock: Math.max(item.stock - 1, 1) }
-          : item
-      )
+      prevCart
+        .map((item) =>
+          item.id === idProduct
+            ? item.cantidad === 1
+              ? (eliminarProductoCarrito(idProduct), null)
+              : { ...item, cantidad: item.cantidad - 1 }
+            : item
+        )
+        .filter(Boolean)
     );
   };
 
@@ -65,8 +62,8 @@ export const CartProvider = ({ children }) => {
     let cantidad = 0;
     let precio = 0;
     cart.forEach((item) => {
-      cantidad += item.stock;
-      precio += item.stock * item.precio;
+      cantidad += item.cantidad || 0; // Asegurar que la cantidad sea un número válido
+      precio += (item.cantidad || 0) * item.precio; // Asegurar que la cantidad sea un número válido
     });
     setTotalQuantity(cantidad);
     setTotalPrice(precio);
@@ -82,6 +79,24 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  const limpiarCarrito = () => {
+    setCart([]);
+    localStorage.setItem("cart", JSON.stringify([]));
+  };
+
+  const eliminarProductoCarrito = async (idProducto) => {
+    try {
+      setCart(cart?.filter((product) => product.id !== idProducto));
+    } catch (error) {
+      console.error(error);
+      Swal.fire(
+        "Error",
+        "Ha ocurrido un error al eliminar el producto del carrito",
+        "error"
+      );
+    }
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -92,6 +107,7 @@ export const CartProvider = ({ children }) => {
         eliminarProductoCarrito,
         incrementarCantidad,
         decrementarCantidad,
+        limpiarCarrito,
       }}
     >
       {children}
